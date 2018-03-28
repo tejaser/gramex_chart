@@ -22,11 +22,11 @@ url:
           headers:
               X-Frame-Options: DENY
               X-Content-Type-Options: no sniff
-    overall_satisfaction:
-      pattern: /overall_satisfaction_rate
+    product_quantity:
+      pattern: /product_quantity
       handler: FunctionHandler
       kwargs:
-        auth: true
-        function: annual_comparisions.overall_satisfaction_rate
+        auth: false
+        function: product_quantity.read_data
         headers:
           Content-Type: application/json
