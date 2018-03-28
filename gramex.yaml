@@ -1,0 +1,32 @@
+import:
+  ui:
+    path: $GRAMEXAPPS/ui/gramex.yaml    # Import the UI components
+    YAMLURL: $YAMLURL/ui/               # ... at this URL
+url:
+    homepage:                           # "homepage" can be replaced with any unique name
+        pattern: /                      # Map the URL /
+        handler: FileHandler            # using a built-in FileHandler
+        kwargs:                         # Pass these options to FileHandler
+            path: $YAMLPATH/index.html  # Show the index.html in the same directory as this YAML file
+
+    hello:                        # a name you want to give to the handler
+        pattern: /hello           # URL pattern
+        handler: FileHandler      # class that implements the handler
+        kwargs:
+          path: $YAMLPATH/static/index2.html
+    js:
+      pattern: /js/(.*)
+      handler: FileHandler
+      kwargs:
+          path: $YAMLPATH/js/*
+          headers:
+              X-Frame-Options: DENY
+              X-Content-Type-Options: no sniff
+    overall_satisfaction:
+      pattern: /overall_satisfaction_rate
+      handler: FunctionHandler
+      kwargs:
+        auth: true
+        function: annual_comparisions.overall_satisfaction_rate
+        headers:
+          Content-Type: application/json
