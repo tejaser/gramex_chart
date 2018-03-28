@@ -28,5 +28,6 @@ url:
       kwargs:
         auth: false
         function: product_quantity.read_data
+        methods: [GET]
         headers:
           Content-Type: application/json
