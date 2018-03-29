@@ -11,13 +11,13 @@ d3.json('/product_quantity', function (error, data) {
     d.TOT_PRICE = +d.TOT_PRICE;
     d.PRICE = +d.PRICE;
   })
-  const width = 960;
-  const height = 500;
-  const xValue = d => d.QUANTITY;
+  const width = 550;
+  const height = 250;
+  const xValue = d => +d.QUANTITY;
   const xLabel = 'Quantity of Product';
   const yValue = d => d.TOT_PRICE;
   const yLabel = 'Total Price';
-  const margin = {left: 150, right: 70, top: 20, bottom: 110};
+  const margin = {left: 75, right: 25, top: 10, bottom: 10};
   const innerHeight = height - margin.top - margin.bottom;
   const svg = d3.select("#product_quantity_chart").append("svg:svg")
     .attr("width", width)
@@ -65,13 +65,15 @@ d3.json('/product_quantity', function (error, data) {
     .domain(d3.extent(data, yValue))
     .range([innerHeight, 0])
     .nice(yTicks);
+
+  const color = d3.scaleOrdinal(d3.schemeCategory10);
   g.selectAll('circle').data(data)
     .enter().append('circle')
     .attr('cx', d => xScale(xValue(d)))
     .attr('cy', d => yScale(yValue(d)))
-    .attr('fill', 'black')
+    .attr('fill', d => color(d.PPC_TYPE))
     .attr('fill-opacity', 0.6)
-    .attr('r', 8);
+    .attr('r', 5);
 
   xAxisG.call(xAxis);
   yAxisG.call(yAxis);

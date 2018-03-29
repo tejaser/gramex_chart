@@ -27,7 +27,16 @@ url:
       handler: FunctionHandler
       kwargs:
         auth: false
-        function: product_quantity.read_data
+        function: product_quantity.scatter_plot_data
+        methods: [GET]
+        headers:
+          Content-Type: application/json
+    channel_price:
+      pattern: /channel_price
+      handler: FunctionHandler
+      kwargs:
+        auth: false
+        function: product_quantity.table_data
         methods: [GET]
         headers:
           Content-Type: application/json
