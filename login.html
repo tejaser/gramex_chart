@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>tejas_try2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/ui/bootstraptheme.css">
+  <link rel="stylesheet" href="/ui/font-awesome/css/font-awesome.min.css">
+  <script src="/ui/jquery/dist/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+  <script src="/ui/popper.js/dist/umd/popper.min.js"></script>
+  <script src="/ui/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/ui/g1/dist/g1.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js"></script>
+
+  <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+
+
+</head>
+<body>
+<div class="row mt-3 justify-content-center">
+
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+          <form method="POST" class="form-group">
+    <input type="hidden" name="_xsrf" value="{{ handler.xsrf_token }}">
+          <div class="col">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>
+              </div>
+              <input name="user" type="text" class="form-control" placeholder="Username" aria-label="Username">
+            </div>
+            <div class="input-group mt-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-lock" aria-hidden="true"></i></span>
+              </div>
+              <input name='password' type="password" class="form-control" placeholder="Password" aria-label="Password">
+            </div>
+            <div class="row justify-content-between mt-2">
+              <div class="col-6">
+                <label class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input">
+                  <span class="custom-control-label"></span>
+                  <span class="custom-control-description">Remember me</span>
+                </label>
+              </div>
+              <div class="col-6 text-right">
+                <p><a href="#">Forgot Password ?</a></p>
+              </div>
+            </div>
+            <div class="row">
+              <button type="submit" class="col-11 mx-auto btn btn-primary">Login</button>
+            </div>
+          </div>
+             </form>
+        </div>
+      </div>
+    </div><!-- /.col -->
+
+
+</div>
+{% if error %}
+<script>
+  alert("Username or Password is Incorrect")
+</script>
+{% end %}
+</body>

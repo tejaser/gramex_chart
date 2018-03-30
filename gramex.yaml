@@ -4,9 +4,10 @@ import:
     YAMLURL: $YAMLURL/ui/               # ... at this URL
 url:
     homepage:                           # "homepage" can be replaced with any unique name
-        pattern: /                      # Map the URL /
+        pattern: /home/                     # Map the URL /
         handler: FileHandler            # using a built-in FileHandler
         kwargs:                         # Pass these options to FileHandler
+            auth: true
             path: $YAMLPATH/index.html  # Show the index.html in the same directory as this YAML file
 
     hello:                        # a name you want to give to the handler
@@ -14,6 +15,24 @@ url:
         handler: FileHandler      # class that implements the handler
         kwargs:
           path: $YAMLPATH/static/index2.html
+    login:
+      pattern: /login/
+      handler: SimpleAuth
+      kwargs:
+          template: login.html
+          credentials:
+              adecco: adecco
+          redirect:
+              url: /home/
+    root:
+      pattern: /
+      handler: FunctionHandler
+      kwargs:
+          auth: true
+          function: views.root
+    auth/logout:
+      pattern: /$YAMLURL/logout   # Map this URL
+      handler: LogoutHandler
     js:
       pattern: /js/(.*)
       handler: FileHandler
@@ -26,7 +45,7 @@ url:
       pattern: /product_quantity
       handler: FunctionHandler
       kwargs:
-        auth: false
+        auth: true
         function: product_quantity.scatter_plot_data
         methods: [GET]
         headers:
@@ -35,7 +54,7 @@ url:
       pattern: /channel_price
       handler: FunctionHandler
       kwargs:
-        auth: false
+        auth: true
         function: product_quantity.table_data
         methods: [GET]
         headers:

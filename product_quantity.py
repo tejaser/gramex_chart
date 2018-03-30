@@ -9,7 +9,14 @@ csv_data = pd.read_csv('./data/Products_1320.csv')
 #     return csv_data
 
 def scatter_plot_data(handler):
-    df = csv_data[csv_data['CLICK_SOURCE'] != 'Direct']
+    print(handler.get_argument('device'))
+    if handler.get_argument('default') == 'false':
+        df = csv_data[csv_data['DEVICE'].isin(handler.get_arguments('device'))]
+        price = handler.get_argument('price').split(',')
+        df = df[(df['PRICE'] > int(price[0])) & (df['PRICE'] < int(price[1]))]
+        df = df[df['CLICK_SOURCE'] != 'Direct']
+    else:
+        df = csv_data[csv_data['CLICK_SOURCE'] != 'Direct']
     result = df.to_json(orient='records')
     return result
 
