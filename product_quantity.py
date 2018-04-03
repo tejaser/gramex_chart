@@ -9,11 +9,16 @@ csv_data = pd.read_csv('./data/Products_1320.csv')
 #     return csv_data
 
 def scatter_plot_data(handler):
+    print('*'*100)
     print(handler.get_argument('device'))
+    print(handler.get_argument('dayOfWeek'))
+    print(len(csv_data.index))
+    print('*'*100)
     if handler.get_argument('default') == 'false':
         df = csv_data[csv_data['DEVICE'].isin(handler.get_arguments('device'))]
+        df = csv_data[csv_data['DAY'].isin(handler.get_arguments('dayOfWeek'))]
         price = handler.get_argument('price').split(',')
-        df = df[(df['PRICE'] > int(price[0])) & (df['PRICE'] < int(price[1]))]
+        # df = df[(df['PRICE'] > int(price[0])) & (df['PRICE'] < int(price[1]))]
         df = df[df['CLICK_SOURCE'] != 'Direct']
     else:
         df = csv_data[csv_data['CLICK_SOURCE'] != 'Direct']

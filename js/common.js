@@ -13,10 +13,9 @@ function product_quantity(filters) {
   console.log(filter_string);
   d3.json("/product_quantity" + filter_string, function(error, data) {
     $("#product_quantity_chart").empty();
-    // console.log(data)
+    console.log(data);
 
     data.forEach(function(d) {
-      $("#id").append("tr");
       d.QUANTITY = +d.QUANTITY;
       d.TOT_PRICE = +d.TOT_PRICE;
       d.PRICE = +d.PRICE;
@@ -100,7 +99,7 @@ function product_quantity(filters) {
 }
 $("#device-filter").multiselect({
   buttonText: function() {
-    return "Sample";
+    return "Device";
   }
 });
 $("#dow-filter").multiselect({
@@ -110,16 +109,18 @@ $("#dow-filter").multiselect({
 });
 filters = {
   device: "DESKTOP",
-  price: [100, 10000],
-  default: "false"
+  dayOfWeek: "Monday",
+  default: "false",
+  price: [1, 1000]
 };
+
 $(".checkbox").on("change", function() {
-  var fruits = [];
+  var device = [];
   var dayOfWeek = [];
 
   var selected = $("#testing input:checked");
   $.each(selected, function(i, val) {
-    fruits.push($(val).attr("value"));
+    device.push($(val).attr("value"));
   });
 
   var selectedDay = $("#dayOfWeek input:checked");
@@ -130,10 +131,10 @@ $(".checkbox").on("change", function() {
 
   filters["device"] = "";
   filters["dayOfWeek"] = "";
-  filters["device"] = fruits.join(",");
+  filters["device"] = device.join(",");
   filters["dayOfWeek"] = dayOfWeek.join(",");
-  filters["fruits"] = fruits.join(",");
 
-  console.log(filters);
+  // console.log(filters);
+  product_quantity(filters);
 });
 product_quantity(filters);
