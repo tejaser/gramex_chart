@@ -1,6 +1,7 @@
 import pandas as pd
-import json
+# import json
 csv_data = pd.read_csv('./data/Products_1320.csv')
+
 
 # def read_data():
 #     """reading pandas data"""
@@ -9,13 +10,10 @@ csv_data = pd.read_csv('./data/Products_1320.csv')
 #     return csv_data
 
 def scatter_plot_data(handler):
-    print('*'*100)
     device_list = list()
     days_list = list()
     device_list = handler.get_argument('device').split(',')
     days_list = handler.get_argument('dayOfWeek').split(',')
-    print(len(csv_data.index))
-    print('*'*100)
     if handler.get_argument('default') == 'false':
         df = csv_data[csv_data['DEVICE'].isin(device_list)]
         df = df[df['DAY'].isin(days_list)]

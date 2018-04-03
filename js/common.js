@@ -13,7 +13,7 @@ function product_quantity(filters) {
   console.log(filter_string);
   d3.json("/product_quantity" + filter_string, function(error, data) {
     $("#product_quantity_chart").empty();
-    console.log(data);
+    // console.log(data);
 
     data.forEach(function(d) {
       d.QUANTITY = +d.QUANTITY;
